@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Χάρτης Εκδρομών στην Ελλάδα</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Χάρτης Εκδρομών στην Ελλάδα</h1>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([37.9838, 23.7275], 7);
+        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        // Δεδομένα σημείων
+        var points = [
+            {
+                coords: [37.259148, 22.647621],
+                name: 'ΠΑΡΝΩΝΑΣ',
+                postLink: 'https://dboskovits.blogspot.com/2024/10/blog-post_31.html',
+                gpxLink: 'https://el.wikiloc.com/podelasia-bounou-diadromes/parnonas-kastanitsa-koruphe-khelimodou-i-m-kontolinas-190062190'
+            },
+            {
+                coords: [37.391580, 24.397821],
+                name: 'ΚΥΘΝΟΣ',
+                postLink: 'https://dboskovits.blogspot.com/2024/10/blog-post_23.html',
+                gpxLink: 'https://el.wikiloc.com/wikiloc/download.do?id=189242666'
+            },
+            {
+                coords: [38.059545, 23.107046],
+                name: 'ΓΕΡΑΝΕΙΑ',
+                postLink: 'https://dboskovits.blogspot.com/2024/10/blog-post_16.html',
+                gpxLink: 'https://el.wikiloc.com/podelasia-bounou-diadromes/geraneia-maurolimne-panagia-phaneromene-these-tzarabe-188514013'
+            },
+            {
+                coords: [38.392495, 23.795543],
+                name: 'ΕΡΕΤΡΙΑ - ΜΙΣΤΡΟΣ',
+                postLink: 'https://dboskovits.blogspot.com/2024/10/blog-post_9.html',
+                gpxLink: 'https://el.wikiloc.com/podelasia-bounou-diadromes/eretria-mistros-187673080'
+            },
+            {
+                coords: [38.440620, 22.878847],
+                name: 'ΛΙΒΑΔΕΙΑ - ΕΛΙΚΩΝΑΣ',
+                postLink: 'https://dboskovits.blogspot.com/2024/10/blog-post.html',
+                gpxLink: 'https://el.wikiloc.com/podelasia-bounou-diadromes/libadeia-elikonas-agia-triada-libadeia-187295951'
+            },
+            {
+                coords: [37.966287, 23.530385],
+                name: 'ΣΑΛΑΜΙΝΑ',
+                postLink: 'https://dboskovits.blogspot.com/2024/09/blog-post_30.html',
+                gpxLink: 'https://el.wikiloc.com/podelasia-bounou-diadromes/salamina-186753640'
+            },
+            {
+                coords: [38.237508, 23.795154],
+                name: 'ΑΓΙΟΣ ΜΕΡΚΟΥΡΙΟΣ-ΙΠΠΟΚΡΑΤΕΙΟΣ ΠΟΛΙΤΕΙΑ',
+                postLink: 'https://dboskovits.blogspot.com/2024/09/blog-post_19.html',
+                gpxLink: 'https://el.wikiloc.com/podelasia-bounou-diadromes/malakasa-agios-merkourios-ippokrateios-politeia-185449123'
+            }
+        ];
+
+        // Δημιουργία πινέζων
+        points.forEach(function(point) {
+            var marker = L.marker(point.coords).addTo(map);
+            marker.bindPopup(`
+                <b>${point.name}</b><br>
+                <a href="${point.postLink}" target="_blank">Ανάρτηση</a><br>
+                <a href="${point.gpxLink}" target="_blank">GPX διαδρομή</a>
+            `);
+        });
+    </script>
+</body>
+</html>
